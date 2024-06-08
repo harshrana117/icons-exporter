@@ -52,6 +52,32 @@ const makeApiCall = async () => {
   }
 };
 
+const executeInParallel = (tasks: any, callback: any) => {
+  let results: any = []
+  let errors: any = []
+  let counter = 0;
+
+  tasks.forEach((icon: any) => {
+    const encodedId = encodeURIComponent(icon.id)
+    const url = `${ICON_BASE_URL}?ids=${encodedId}&format=svg`;
+
+    axios.get(url, {
+      headers
+    }).then((res: any) => {
+      counter++;
+     results.push(res.data.images[icon.id])
+    }).catch((err: any) => {
+      counter++;
+      errors.push(err)
+    }).finally(() => {
+      if(counter === tasks.length){
+        callback(results, errors)
+      }
+    })
+  })
+
+}
+
 const downloadSVGsData = async <T extends {}>(
   data: ({ url: string } & T)[]
 ) => {
@@ -69,6 +95,13 @@ const downloadSVGsData = async <T extends {}>(
 const getImageUrl = async () => {
   const data = await makeApiCall();
   console.log('DATA:', data);
+
+  executeInParallel(data, (res: any, rej: any) => {
+    console.log('resolved', res)
+    console.log('rej', rej)
+  })
+
+
 
   // let dataResponse : any = []
 

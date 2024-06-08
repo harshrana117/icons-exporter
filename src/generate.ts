@@ -63,9 +63,10 @@ const executeInParallel = (tasks: any, callback: any) => {
 
     axios.get(url, {
       headers
-    }).then((res: any) => {
+    }).then(async (res: any) => {
       counter++;
-     results.push(res.data.images[icon.id])
+      const svgResponse = await axios.get(res.data.images[icon.id])
+      results.push({url: res.data.images[icon.id], svg: svgResponse.data})
     }).catch((err: any) => {
       counter++;
       errors.push(err)

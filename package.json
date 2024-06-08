@@ -1,0 +1,30 @@
+{
+  "name": "figma-icons-exporter-fx",
+  "version": "1.0.0",
+  "description": "Exports figma svg icons into React component",
+  "main": "index.js",
+  "author": "Harsh Rana",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "icons": "ts-node ./src/generate.ts"
+  },
+  "dependencies": {
+    "@svgr/core": "5.5.0",
+    "@svgr/plugin-prettier": "5.5.0",
+    "@svgr/plugin-svgo": "5.5.0",
+    "axios": "^1.6.7",
+    "chalk": "4.1.2",
+    "dotenv": "^16.4.1",
+    "figma-api-exporter": "^1.0.0",
+    "fs-extra": "^11.2.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.52",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
